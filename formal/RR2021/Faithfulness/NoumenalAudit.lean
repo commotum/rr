@@ -1,0 +1,33 @@
+import RR2021.Faithfulness.Noumenal
+import RR2021.Faithfulness.NoumenalContextual
+
+/-!
+# Audit surface for the Appendix B quotient
+
+This diagnostic leaf keeps the principal source-facing signatures and their
+axiom dependencies visible without enlarging the public construction module.
+-/
+
+#check RR2021.Faithfulness.NoumenallyEquivalent
+#check RR2021.Faithfulness.noumenalActionSetoid
+#check RR2021.Faithfulness.noumenalActionCon
+#check RR2021.Faithfulness.NoumenalQuotientTransformation
+#check RR2021.Faithfulness.NoumenalQuotientTransformation.mk_eq_mk_iff
+#check RR2021.Faithfulness.NoumenalQuotientTransformation.quotientIndexedMonoid
+#check RR2021.Faithfulness.NoumenalQuotientTransformation.quotientNoumenalActionEffective
+#check RR2021.Faithfulness.noumenallyEquivalent_phenomenal_smul
+#check RR2021.Faithfulness.noumenallyEquivalent_contextuallyPhenomenallyEquivalent
+#check RR2021.Faithfulness.noumenallyEquivalent_phenomenallyEquivalent
+#check RR2021.Faithfulness.noumenallyFaithful_of_contextualPhenomenalFaithfulness
+#check RR2021.Faithfulness.noumenallyEquivalent_transformationProduct
+#check RR2021.Faithfulness.NoumenalQuotientTransformation.quotientTransformationProducts
+#check RR2021.Faithfulness.NoumenalQuotientTransformation.quotientLocality
+#check RR2021.Theories.LocalRealisticCore.toNoumenallyFaithfulQuotient
+
+#print axioms RR2021.Faithfulness.NoumenalQuotientTransformation.quotientNoumenalActionEffective
+#print axioms RR2021.Faithfulness.noumenallyEquivalent_phenomenal_smul
+#print axioms RR2021.Faithfulness.noumenallyEquivalent_contextuallyPhenomenallyEquivalent
+#print axioms RR2021.Faithfulness.noumenallyFaithful_of_contextualPhenomenalFaithfulness
+#print axioms RR2021.Faithfulness.noumenallyEquivalent_transformationProduct
+#print axioms RR2021.Faithfulness.NoumenalQuotientTransformation.quotientLocality
+#print axioms RR2021.Theories.LocalRealisticCore.toNoumenallyFaithfulQuotient

@@ -1,0 +1,36 @@
+import RR2021.Correspondence.Theorems
+
+/-!
+# Correspondence signature and axiom audit
+
+This diagnostic leaf prints every public constructor boundary, the two exact
+operational-preservation theorems, and the conditional Appendix-A preservation
+results relevant to interpreting the theorem family.
+-/
+
+#check RR2021.Correspondence.forward
+#check RR2021.Correspondence.phenomenalFaithfulnessQuotient
+#check RR2021.Correspondence.phenomenalFaithfulnessQuotient_faithful
+#check RR2021.Correspondence.noumenalFaithfulnessQuotient
+#check RR2021.Correspondence.transitiveReverseRetainingTransformations
+#check RR2021.Correspondence.transitiveReverseWithFaithfulQuotient
+#check RR2021.Correspondence.generalReverseRetainingTransformations
+#check RR2021.Correspondence.generalReverseWithFaithfulQuotient
+#check RR2021.Correspondence.SameOperationalData
+#check RR2021.Correspondence.transitiveReverse_forward_sameOperationalData
+#check RR2021.Correspondence.generalReverse_forward_sameOperationalData
+
+#check RR2021.Faithfulness.phenomenalQuotient_invertibleDynamics
+#check RR2021.Faithfulness.phenomenalQuotient_globallyTransitive_iff
+#check RR2021.Faithfulness.phenomenalQuotient_transformationSeparation
+#check RR2021.Theories.LocalRealisticCore.toNoumenallyFaithfulQuotient
+
+#print axioms RR2021.Correspondence.forward
+#print axioms RR2021.Correspondence.phenomenalFaithfulnessQuotient_faithful
+#print axioms RR2021.Correspondence.noumenalFaithfulnessQuotient
+#print axioms RR2021.Correspondence.transitiveReverseRetainingTransformations
+#print axioms RR2021.Correspondence.transitiveReverseWithFaithfulQuotient
+#print axioms RR2021.Correspondence.generalReverseRetainingTransformations
+#print axioms RR2021.Correspondence.generalReverseWithFaithfulQuotient
+#print axioms RR2021.Correspondence.transitiveReverse_forward_sameOperationalData
+#print axioms RR2021.Correspondence.generalReverse_forward_sameOperationalData

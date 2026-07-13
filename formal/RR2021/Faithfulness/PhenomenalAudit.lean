@@ -1,0 +1,53 @@
+import RR2021.Faithfulness.PhenomenalPreservation
+
+/-!
+# Phenomenal quotient signature and axiom audit
+
+The checks keep the corrected Appendix A congruences, all five descended parts
+of Axiom 4.6, contextual faithfulness, and the conditional C013 separation
+boundary visible in one narrow leaf.
+-/
+
+#check RR2021.Theories.NoSignallingTheory.phenomenallyEquivalent_refl
+#check RR2021.Theories.NoSignallingTheory.phenomenallyEquivalent_action_eq
+#check RR2021.Theories.NoSignallingTheory.phenomenallyEquivalent_mul
+#check RR2021.Theories.NoSignallingTheory.phenomenallyEquivalent_product
+#check RR2021.Theories.NoSignallingTheory.phenomenalSetoid
+#check RR2021.Theories.NoSignallingTheory.phenomenalCon
+
+#check RR2021.Faithfulness.PhenomenalTransformation
+#check RR2021.Faithfulness.phenomenalTransformationProduct
+#check RR2021.Faithfulness.phenomenalQuotient_noSignalling
+#check RR2021.Faithfulness.phenomenalQuotient_productMultiplicative
+#check RR2021.Faithfulness.phenomenalQuotient_productUnital
+#check RR2021.Faithfulness.phenomenalQuotient_productSymmetric
+#check RR2021.Faithfulness.phenomenalQuotient_productAssociative
+#check RR2021.Faithfulness.phenomenalQuotientTheory
+#check RR2021.Faithfulness.phenomenalQuotientTheory_phenomenallyFaithful
+
+#check RR2021.Theories.NoSignallingTheory.TransformationSeparationModuloPhenomenalEquivalence
+#check RR2021.Theories.NoSignallingTheory.transformationSeparationModulo_of_faithful
+#check RR2021.Faithfulness.phenomenalQuotient_invertibleDynamics
+#check RR2021.Faithfulness.phenomenalQuotient_globallyTransitive_iff
+#check RR2021.Faithfulness.phenomenalQuotient_transformationSeparation
+
+#print RR2021.Theories.NoSignallingTheory.phenomenallyEquivalent_action_eq
+#print RR2021.Theories.NoSignallingTheory.phenomenallyEquivalent_mul
+#print RR2021.Theories.NoSignallingTheory.phenomenallyEquivalent_product
+#print RR2021.Faithfulness.phenomenalQuotientTheory
+#print RR2021.Faithfulness.phenomenalQuotientTheory_phenomenallyFaithful
+#print RR2021.Theories.NoSignallingTheory.TransformationSeparationModuloPhenomenalEquivalence
+
+#print axioms RR2021.Theories.NoSignallingTheory.phenomenallyEquivalent_action_eq
+#print axioms RR2021.Theories.NoSignallingTheory.phenomenallyEquivalent_mul
+#print axioms RR2021.Theories.NoSignallingTheory.phenomenallyEquivalent_product
+#print axioms RR2021.Faithfulness.phenomenalQuotient_noSignalling
+#print axioms RR2021.Faithfulness.phenomenalQuotient_productMultiplicative
+#print axioms RR2021.Faithfulness.phenomenalQuotient_productUnital
+#print axioms RR2021.Faithfulness.phenomenalQuotient_productSymmetric
+#print axioms RR2021.Faithfulness.phenomenalQuotient_productAssociative
+#print axioms RR2021.Faithfulness.phenomenalQuotientTheory
+#print axioms RR2021.Faithfulness.phenomenalQuotientTheory_phenomenallyFaithful
+#print axioms RR2021.Faithfulness.phenomenalQuotient_invertibleDynamics
+#print axioms RR2021.Faithfulness.phenomenalQuotient_globallyTransitive_iff
+#print axioms RR2021.Faithfulness.phenomenalQuotient_transformationSeparation

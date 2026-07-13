@@ -33,11 +33,163 @@ The goal is not a line-by-line transcription and not a formal endorsement of the
 - The source explicitly discusses systems, noumenal and phenomenal states, transformations and two actions, a surjective equivariant noumenal–phenomenal map, projectors, compatibility, state and transformation products, and no-signalling.
 - Its reverse construction is presented first with global transitivity and then with an enlarged-state construction intended to remove that postulate.
 - The source also contains substantial conceptual and philosophical discussion that is not automatically formalizable mathematics.
-- The repository currently contains no Lean source files, `lakefile`, or `lean-toolchain`; project creation and version pinning are required.
+- Stage `1-SURVEY` bootstrapped the Lean project in `formal/`: `lean-toolchain` pins Lean `4.31.0`, `lakefile.lean` pins mathlib commit `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`, and the committed manifest records the resolved dependency graph.
 - The repository-root `BUILD-PLAN.md` is an exact copy of the supplied generic Lean goal build plan. It requires low-dependency core modules, narrow proof/audit leaves, thin public API modules, import hygiene, focused builds, adjacent-consumer builds, boundary checks, and evidence-based stage fold-back.
 - No existing `goal-*` folder preceded this scaffold, so this operating folder is `goal-1/`.
+- The initial 2026-07-12 inspection established the pre-bootstrap baseline: root `lake build` failed because no Lake configuration existed. The repository pin now resolves Lean `4.31.0` at commit `68218e876d2a38b1985b8590fff244a83c321783`, and the checked-out mathlib dependency is exactly the pinned commit.
+- The initial Git worktree was clean at commit `ce8fa8e`, and the source Markdown is exactly 3,014 lines with nine extracted diagram images.
+- `goal-1/source-ledger.md` now contains 149 stable items: 89 numbered-label occurrences, 45 material unnumbered claims/constructions, and 15 outside-scope or interpretative entries. All have source locations, initial statuses, dependencies, and target stages/modules.
+- `goal-1/corrections.md` records 20 conversion defects, source defects, scope corrections, and explicit proof obligations with conservative repairs and downstream consequences.
+- Stage 1 compiled four narrow probes: Boolean-algebra system/disjointness, standard indexed `MulAction` orientation, explicit `Setoid`/`Quotient.lift` descent through a named congruence theorem, and compatibility-indexed partial products with no off-domain result.
+- Final Stage 1 verification passed focused builds (374 jobs), adjacent API/audit/root builds (378 jobs), and full `lake build` (377 jobs). No `sorry`, `admit`, placeholder tactic, project `axiom`, or `opaque` declaration occurs in Lean sources.
+- The source audit found central qualifications that later stages must preserve: separation is still required by Theorem 5.8; phenomenal quotienting does not automatically preserve separation; Appendix A Theorem A.2 pairs the wrong hypotheses; iterated partial-product definedness is argued circularly; Section 5.1 omits most descent/coherence proofs; and Appendix C needs finite-dimensional/nonzero-factor hypotheses.
+- Stage `2-SYSTEMS` now provides the stable `RR2021.Systems` layer: source-facing subsystem/separation/composite terminology, minimal-hypothesis lattice lemmas, Boolean complement decompositions, named dependent reindexing, four-object associativity coherence, and finite regression/counterexamples.
+- The system carrier remains mathlib `BooleanAlgebra`, matching Definition 3.1, while cheap declarations expose weaker assumptions (`LE`, `Max`, semilattices, bounded order, `DistribLattice`, or `HeytingAlgebra`) where verified.
+- The corrected Theorem 5.2 system obligations are stronger than the source states explicitly. For `C=Aᶜ⊓B` and `A≤B`, Lean now proves `A⊥Bᶜ`, `C⊥Bᶜ`, `A⊥C`, `A⊔C=B`, and `C⊔Bᶜ=Aᶜ`, plus coherence of the two paths from `(A⊔C)⊔Bᶜ` to `⊤`.
+- Stage 2 also proves the complement decompositions silently used later around Theorem 5.8: for disjoint `A,B`, `B⊔(A⊔B)ᶜ=Aᶜ` and `A⊔(A⊔B)ᶜ=Bᶜ`.
+- Final Stage 2 verification passed focused builds (362 jobs), finite examples plus adjacent API/audit/root builds (622 jobs), and full `lake build` (366 jobs). Stable system sources contain no proof holes, project axioms, explicit choice calls, or raw equality elimination outside the named `reindex` implementation.
+- Stage `3-DYNAMICS` now provides the stable `RR2021.Dynamics` layer: indexed monoid/group/action families, function-only indexed maps with separate properties, nested projectors with derived self-projection, honest compatibility-indexed state products, noncircular binary/triple coherence, raw transformation products, and explicit locality.
+- Axiom 3.12's domain is repaired to be exactly separated compatibility. The product has no incompatible-input value; compatibility-proof independence, projections, reconstruction, common-extension equality, and composite uniqueness are derived without choice.
+- The circular triple-definedness argument in `RR-C006` is replaced by conversions between explicit left- and right-bracketed definedness propositions, each built from actual common extensions. State-product commutativity and associativity expose `sup_comm`/`sup_assoc` transports and require pairwise separation.
+- Transformation-product multiplication, identity, symmetry, and associativity are separate predicates derived from locality plus explicit action effectivity. No group assumption is used for these Section 3 laws.
+- Final Stage 3 verification passed focused builds (382 jobs), concrete examples plus adjacent API/audit/root builds (660 jobs), and full `lake build` (387 jobs). The audit reports no axioms for binary state/product and basic locality laws; transport-sensitive coherence uses `[propext]` only, with no choice or quotient axioms.
+- Stage `4-THEORIES` now provides the stable `RR2021.Theories` layer. `PhenomenalTheory` captures Axioms 4.1--4.5, while `NoSignallingTheory` adds the precise state-level marginal proposition and the four Axiom 4.6 transformation-product laws without any noumenal or reverse-construction data.
+- `LocalRealisticCore` contains every corrected Section 3 requirement except Axiom 3.7; `LocalRealisticWithoutFaithfulness` names that boundary, and `LocalRealisticTheory` adds exactly noumenal action effectivity. Phenomenal state nonemptiness and phenomenal-projector surjectivity are derived rather than stored redundantly.
+- Invertible dynamics, transformation separation, contextual phenomenal faithfulness, noumenal faithfulness, and global transitivity are distinct predicates. Transformation separation exposes pairwise system separation plus the permutation/associativity transports suppressed by the source's `ABC` notation.
+- Theory-level validation proves transformation-product uniqueness and Theorems 3.8--3.11 from full local-realistic data. Theorem 4.1 is checked both as a two-sided inverse construction and an inverse-uniqueness equality, using only product multiplicativity/unitality and component inverse witnesses.
+- A non-boundary no-signalling example with natural-number transformations and Boolean states proves failure of invertibility, phenomenal faithfulness, and global transitivity, mechanically guarding against reverse-postulate field creep.
+- Final Stage 4 verification passed focused structure builds (383 jobs), validation/example builds (637 jobs), adjacent API/audit/root builds (393 jobs), and a full pinned build. Constructor prints confirm the intended field boundaries; completed theory sources contain no proof holes, project axioms, explicit choice/quotient operations, defaults, or later-stage imports.
+- Stage `5-FORWARD` proves the source's state-level no-signalling equation already from `LocalRealisticCore`, without noumenal action faithfulness. Phenomenalization surjectivity is eliminated only inside the proof, and every action/projection transition is justified by equivariance, projector compatibility, or noumenal locality.
+- `LocalRealisticCore.toPhenomenalTheory` forgets the noumenal layer using derived phenomenal nonemptiness/projector surjectivity. `LocalRealisticTheory.toNoSignallingTheory` is the complete forward constructor and fills Axiom 4.6 with the core marginal theorem plus the four previously derived product laws.
+- Reverse assumptions and inverse-product results now live in the isolated `Theories.Postulates` leaf. The transitive import graphs of `Forward.Core` and `Forward.Construction` do not reach that module, so the forward direction is separated both semantically and at dependency level.
+- A natural-number/trivial-action example proves the pre-faithful core is genuinely non-effective while still satisfying the state-level theorem; a separate faithful singleton model exercises the full constructor.
+- Final Stage 5 verification passed the focused core build (384 jobs), constructor/example build (639 jobs), adjacent API/audit/root build (397 jobs), and full build (396 jobs). Principal forward declarations audit with the standard Boolean-algebra foundations `[propext, Classical.choice, Quot.sound]` and no project axiom or explicit choice/quotient operation.
+- Stage `6-FAITHFUL` independently verifies both source quotient constructions. Appendix A's contextual relation is an explicit setoid/monoid congruence; its action and separated product descend through Theorems A.1 and A.3, and all five no-signalling laws are re-proved on the quotient. The output is contextually `PhenomenallyFaithful`, with no unsupported local-action effectivity claim.
+- Appendix A preserves invertibility and preserves/reflects global transitivity. Transformation separation is proved only from the explicit `TransformationSeparationModuloPhenomenalEquivalence` repair; raw separation alone is not claimed to survive, preserving `RR-C013` as a genuine source gap.
+- Appendix B's noumenal action-kernel relation is an explicit setoid/congruence. Both actions, the transformation product, phenomenalization equivariance, and locality descend, while states, projectors, the phenomenalization map, and the compatibility-indexed state product remain unchanged. `LocalRealisticCore.toNoumenallyFaithfulQuotient` returns a directly consumable full `LocalRealisticTheory` using a theory-tagged quotient family.
+- Theorems 4.2--4.3 are checked at full contextual strength. Natural-number trivial-action regressions prove distinct raw transformations collapse under each quotient, and consumer probes exercise field projection, derived product laws, and the forward constructor after Appendix B.
+- Final Stage 6 verification passed focused cores (460 jobs), constructor/example builds (672 jobs), adjacent API/audit/root builds (476 jobs), and full build (473 jobs). Both audit leaves report only the established Boolean/quotient foundations, with no explicit representative choice or project axiom.
+- Stage `7-TRANSITIVE` verifies the source's first reverse construction from a no-signalling theory with explicit existential invertibility, raw transformation separation, global transitivity, and a chosen global reference state. Contextual phenomenal faithfulness is needed only by the full original-transformation wrapper, after a complete `LocalRealisticCore` already exists.
+- The fundamental relation is a proved setoid on global transformations. Corrected Theorem 5.2 uses `Aᶜ⊓B` and named path coherence; Theorem 5.8 uses one global right-inverse witness and the raw separation postulate. Invertibility is not strengthened to a group, and no unconditional quotient-preservation claim is made for separation.
+- Compatibility is equivalent to sharing a global representative, and `[W]_A⊙[W]_B=[W]_{A⊔B}` is checked. Because compatibility stores existence in `Prop`, one named `Classical.choose` realizes the already-proved unique common extension; there is no incompatible-state value or representative extraction.
+- Theorems 5.10--5.14 compile with all triple-product and projector transports explicit. `RR-C020` corrects the PDF's ill-typed Theorem 5.13 proof path. Global transitivity appears only in phenomenalization surjectivity.
+- `theoryAtReference` retains the input transformations under phenomenal faithfulness. `faithfulQuotientAtReference` implements the transitive `RR-C017` route without phenomenal faithfulness by applying Appendix B only after reverse postulates have been consumed.
+- Final Stage 7 verification passed focused relation/action builds (391 jobs), product/map/constructor examples (471 jobs), adjacent API/audit/root builds (485 jobs), and full build (484 jobs). Public consumer probes and three scoped reviews pass.
+- Stage `8-GENERAL` removes global transitivity by pairing each fundamental
+  quotient state with a global phenomenal-state label. Action and projection
+  preserve that label, and enlarged compatibility is proved equivalent to
+  label equality plus fundamental compatibility.
+- The enlarged state product reuses Stage 7's compatibility-only product,
+  adds no new choice or off-domain value, and proves both arbitrary
+  reconstruction and Theorem 5.15's direct shared-representative formula.
+- The corrected `RR-C010` phenomenal map applies the descended quotient-state
+  map at the stored label. Equivariance, projection compatibility, and
+  Theorem 5.16 surjectivity are explicit; the last uses only input projector
+  surjectivity, not global transitivity.
+- `General.core` requires no-signalling, existential invertibility, and raw
+  transformation separation. `General.theory` additionally requires
+  contextual phenomenal faithfulness to retain the original transformations;
+  `General.faithfulQuotient` instead changes transformations through Appendix
+  B and requires neither phenomenal faithfulness nor global transitivity.
+- `RR-C011`'s omitted Section 5.1 laws and the general `RR-C017` route are now
+  verified. Separation and invertibility remain explicit, so the result is
+  not an unconditional equivalence.
+- Final Stage 8 verification passed focused state/product/locality builds (396
+  jobs), map/constructor/example builds (475 jobs), adjacent API/audit/root
+  builds (491 jobs), and full build (490 jobs). Stable consumer probes, static
+  boundary scans, and three scoped reviews pass.
+- Stage `9-CORRESPONDENCE` exposes seven separate public constructors rather
+  than an equivalence object: forward, the two faithfulness quotients, raw and
+  quotient transitive reverse outputs, and raw and quotient general reverse
+  outputs. Every assumption and changed transformation family is visible in
+  its signature.
+- `SameOperationalData` compares no-signalling theories only after fixing the
+  same transformations, phenomenal states, monoid, and action. Forwarding the
+  raw transitive or general reverse output preserves the source phenomenal
+  projectors and separated transformation product. Quotient outputs have no
+  such same-signature theorem.
+- The weakest-premise full general reverse constructor verified here requires
+  no-signalling, existential invertibility, and raw transformation separation;
+  it needs neither global transitivity nor phenomenal faithfulness, but its
+  output uses the Appendix-B transformation quotient. Retaining raw
+  transformations additionally requires contextual phenomenal faithfulness.
+- No logical minimality, model category, two-sided inverse relationship between
+  the forward and reverse constructions, uniqueness, canonicity, universal
+  property, observation semantics, or empirical equivalence is proved. The
+  quantum instance was carried into Stage 10 and remains explicitly deferred.
+- Final Stage 9 verification passed the focused theorem-family build (484
+  jobs), consumer/audit build (487 jobs), adjacent API/root build (492 jobs),
+  and full build (492 jobs). Exact signature/axiom checks, import scans,
+  documentation/whitespace checks, and three independent reviews pass.
+- Stage 10 source/mathlib audit finds that Appendix C's unrestricted
+  endomorphism-basis argument is invalid outside finite dimensions and its
+  final `V^C` sentence both misnames `V^B` and omits unitarity reflection.
+  The honest repair uses finite complex matrices, explicit tensor association,
+  and nonempty outer factors.
+- Pinned mathlib provides matrix Kronecker products, finite matrix-algebra
+  tensor equivalences, conjugate transpose, and unitary groups. It does not
+  provide a density-operator or partial-trace abstraction, so a complete
+  system-indexed quantum `NoSignallingTheory` would require substantial new
+  state/projector/coherence infrastructure rather than a wrapper.
+- Mathlib separately proves that two unitary isometries induce equal
+  conjugation automorphisms on the full continuous-operator algebra exactly
+  when they differ by a unitary scalar. This is a checked nearby phase theorem,
+  not yet the source's contextual equivalence on density states and separated
+  extensions.
+- Stage `10-QUANTUM` verifies the finite Appendix-C core over `ℂ` without the
+  source's unrestricted basis argument. `commonMiddleFactor` proves both
+  factorizations from an explicit six-index overlap equation and nonempty
+  outer factors; `mem_unitary_of_kronecker_one` reflects both unitary equations;
+  `commonMiddleUnitaryFactor` constructs the correctly named unitary `VB`.
+- Empty-left and empty-right coordinate regressions show why the two outer
+  nonempty premises cannot be erased. The corrected theorem actually needs
+  only `VBC` unitarity, so the paper's unused `VAB`-unitarity premise is not
+  retained.
+- `conjugation_eq_iff_unitaryPhase` exports the exact full-operator-algebra
+  phase theorem. The density-state contextual characterization, phase-quotient
+  separation, pure-state transitivity, and complete quantum no-signalling
+  instance remain explicit deferrals; no project axiom or placeholder stands
+  in for them.
+- Final Stage 10 verification passed the focused finite-matrix build (1686
+  jobs), phase/consumer/audit build (2356 jobs), adjacent API/root build (2409
+  jobs), and full build (2409 jobs). Exact signature/axiom checks, import and
+  no-instance scans, documentation/whitespace checks, empty-factor regressions,
+  and three independent reviews pass.
+- Stage `11-MODELS` exports a stable complete singleton-state/
+  singleton-transformation model over the nontrivial Boolean algebra
+  `Finset (Fin 2)`. It constructs every local-realistic field directly,
+  forwards to no-signalling, proves all four reverse predicates, consumes both
+  general reverse outputs, and checks one-sided operational preservation for
+  the raw output.
+- A separate consumer imports only root `RR2021.API` and exercises model fields,
+  forward/reverse constructors, inferred faithful actions, derived product
+  laws, and `SameOperationalData`. Models API contains no audit/example leaf.
+- Consolidated regressions now cover composition orientation, absent
+  cross-system equality, incompatible partial-product inputs, three separate
+  non-implications from base no-signalling, raw distinctness and collapse in
+  both faithfulness quotients, impossibility of representative-sensitive raw
+  recovery, and empty left/right tensor cancellation.
+- The Nat/Bool boundary model is not called a pairwise independence family,
+  and the generic quotient descent failure is not presented as a countermodel
+  to `RR-C013`; raw-separation preservation through Appendix A remains
+  open/unsupported.
+- Final Stage 11 verification passed the focused model build (692 jobs),
+  root-only consumer/audit build (2417 jobs), adjacent API/root build (2411
+  jobs), and full build (2411 jobs). Axiom/import/no-cheating scans,
+  documentation/whitespace checks, and three independent reviews pass.
+- Stage `12-RELEASE` reconciled the README, final report, architecture,
+  corrections, ledger, and all stage statuses. A clean-state rebuild completed
+  all 2,411 targets after rebuilding one transiently missing mathlib artifact;
+  all 13 audit modules then passed at 2,432 jobs and all 10 example modules at
+  2,419 jobs. Exact pins, clean mathlib status, 87 Lean sources/545 top-level
+  declarations, no-cheating/import scans, 149-item ledger disposition, local
+  links, documentation coverage, whitespace, and scoped worktree inventory
+  were rechecked independently.
 
-## Initial Assumptions to Test, Not Trust
+## Historical Initial Assumptions to Test, Not Trust
+
+These Stage-1 questions are retained as design history. Later current-fact
+bullets and completed-stage evidence record which were resolved or deferred.
 
 - A Boolean algebra may be the clearest system algebra because the arguments use bottom, top, complement, disjointness, joins, and decompositions; the exact required typeclass hierarchy must be determined from actual proof use.
 - Transformations may need group structure for the reverse theorem while the forward framework may need only a monoid action. These layers should be separated rather than globally strengthening all dynamics.
@@ -56,7 +208,7 @@ The goal is not a line-by-line transcription and not a formal endorsement of the
 - Every principal source item appears in a traceability table with one of: as stated, corrected, split, additional assumptions, partial, intentionally excluded, or unresolved.
 - Every correction records source location, original claim, defect, corrected formulation, justification, and effects on dependent results.
 - The forward theorem proves that a suitably defined local-realistic structure induces a no-signalling structure without importing reverse-direction assumptions.
-- The reverse theorem constructs a local-realistic model from a no-signalling structure under an inspectable, minimized list of hypotheses and verifies all representative independence and coherence laws.
+- The reverse theorem constructs a local-realistic model from a no-signalling structure under an inspectable, dependency-audited hypothesis list and verifies all representative independence and coherence laws.
 - Separate results cover phenomenal faithfulness, noumenal faithfulness, the transitive construction, and the general enlarged-state construction; their relationships and preservation guarantees are explicit.
 - Products and projections on quotient objects are proved well-defined, and partial compatibility domains are not silently totalized.
 - Representative small models or countermodels exercise the API and distinguish non-equivalent assumption packages where useful.
@@ -78,6 +230,23 @@ The goal is not a line-by-line transcription and not a formal endorsement of the
 10. `10-QUANTUM` — audit and, where feasible, finite-dimensional unitary instance
 11. `11-MODELS` — representative examples, countermodels, and API hardening
 12. `12-RELEASE` — traceability completion, correction report, axiom audit, and clean build
+
+## Stage Status
+
+| Stage | Status | Evidence / next obligation |
+|---|---|---|
+| `1-SURVEY` | complete | `goal-1/1-SURVEY.md`; pinned build, 149-entry ledger, correction log (now 20 entries), architecture ADR, compiling probes and audit |
+| `2-SYSTEMS` | complete | `goal-1/2-SYSTEMS.md`; stable Systems API, typed relative-complement partitions, finite regressions, reindex/coherence audit |
+| `3-DYNAMICS` | complete | `goal-1/3-DYNAMICS.md`; stable Dynamics API, exact-domain partial products, repaired triple coherence, locality-derived transformation laws, finite/trivial examples, and axiom/import audit |
+| `4-THEORIES` | complete | `goal-1/4-THEORIES.md`; modular phenomenal/no-signalling and pre-faithful/faithful local-realistic structures, separate reverse postulates, source matrix, positive and negative constructor models, axiom/import audit |
+| `5-FORWARD` | complete | `goal-1/5-FORWARD.md`; assumption-minimal Theorem 3.12, phenomenal forgetful map, full forward constructor, literal reverse-import isolation, pre-faithful/full examples, signature/axiom audit |
+| `6-FAITHFUL` | complete | `goal-1/6-FAITHFUL.md`; both setoids/quotients, all action/product/locality descent, contextual 4.2--4.3, conditional C013 separation repair, non-vacuous collapse examples, consumer and axiom audits |
+| `7-TRANSITIVE` | complete | `goal-1/7-TRANSITIVE.md`; fundamental setoid, corrected projectors, honest unique-choice state product, locality, reference-state map, exact hypothesis audit, original and C017 full constructors |
+| `8-GENERAL` | complete | `goal-1/8-GENERAL.md`; label-enlarged states, exact compatibility, inherited honest product, corrected map, transitivity-free surjectivity, exact original-family and Appendix-B constructors, consumer/axiom audits |
+| `9-CORRESPONDENCE` | complete | `goal-1/9-CORRESPONDENCE.md`; seven exact constructor names, raw-versus-quotient boundary, one-sided operational-data preservation, claim-status matrix, consumer/import/axiom audit |
+| `10-QUANTUM` | complete | `goal-1/10-QUANTUM.md`; finite matrix tensor equivalence, corrected overlap factorization, explicit nonempty cancellation, derived middle unitarity, scoped operator-algebra phase theorem, full-instance deferral audit |
+| `11-MODELS` | complete | `goal-1/11-MODELS.md`; stable end-to-end finite trivial model, root-only consumer, both general reverse outputs, operational preservation, consolidated partiality/transport/assumption/quotient/tensor regressions |
+| `12-RELEASE` | complete | `goal-1/12-RELEASE.md`; final report/README reconciliation, independent claim and documentation reviews, clean-state 2,411-job build, all-audit 2,432-job build, all-example 2,419-job build, final static/reproducibility gates |
 
 ## 1-SURVEY
 
