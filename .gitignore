@@ -13,3 +13,4 @@ wheels/
 formal/.lake/
 *.olean
 *.ilean
+.DS_Store
